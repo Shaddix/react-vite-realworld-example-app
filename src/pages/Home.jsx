@@ -1,9 +1,25 @@
 import classNames from 'classnames'
 import React from 'react'
+import { ViewState } from '@devexpress/dx-react-scheduler';
+
+import {
+  Scheduler,
+  WeekView,
+  Toolbar,
+  Appointments,
+  AllDayPanel,
+} from '@devexpress/dx-react-scheduler-material-ui';
+
 import { ArticleList, PopularTags } from '../components'
 import { useAuth } from '../hooks'
 
+import appointments from '../data/appointments'
+
 const initialFilters = { tag: '', offset: null, feed: false }
+
+const messages = {
+  allDay: 'Temps plein',
+}
 
 function Home() {
   const { isAuth } = useAuth()
@@ -33,6 +49,24 @@ function Home() {
           <p>A place to share your knowledge.</p>
         </div>
       </div>
+      <Scheduler
+        data={appointments}
+        locale="fr-FR"
+        height={660}
+      >
+        <ViewState
+          defaultCurrentDate="2018-06-27"
+        />
+        <WeekView
+          startDayHour={9}
+          endDayHour={19}
+        />
+        <Toolbar />
+        <Appointments />
+        <AllDayPanel
+          messages={messages}
+        />
+      </Scheduler>
       <div className="container page">
         <div className="row">
           <div className="col-md-9">
