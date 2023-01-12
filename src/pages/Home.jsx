@@ -14,7 +14,11 @@ import { ArticleList, PopularTags } from '../components'
 import { useAuth } from '../hooks'
 
 import appointments from '../data/appointments'
-
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 const initialFilters = { tag: '', offset: null, feed: false }
 
 const messages = {
@@ -47,6 +51,13 @@ function Home() {
         <div className="container">
           <h1 className="logo-font">conduit</h1>
           <p>A place to share your knowledge.</p>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DateTimePicker 
+              value={new Date()} 
+              onChange={()=>{}}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
         </div>
       </div>
       <Scheduler
